@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CodeCert™ - Cursos y Certificados Gratis</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        html { scroll-behavior: smooth; }
+        @keyframes shimmer {
+            100% { transform: translateX(100%); }
+        }
+        body { 
+            margin: 0; 
+            padding: 0; 
+            background-color: #070913; 
+            overflow-x: hidden; 
+        }
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #070913; }
+        ::-webkit-scrollbar-thumb { 
+            background: rgba(255,255,255,0.1); 
+            border-radius: 4px; 
+            border: 1px solid rgba(255,255,255,0.05); 
+        }
+        ::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.2); }
+    </style>
+</head>
+<body class="min-h-screen bg-[#070913] font-sans selection:bg-cyan-500/30 text-white relative">
+
+    <!-- Capas de Fondo Animado Glass (Estilo Apple) -->
+    <div class="fixed inset-0 z-0 pointer-events-none">
+        <div class="absolute top-[-10%] left-[-10%] w-[50vw] h-[50vw] bg-indigo-600/20 rounded-full mix-blend-screen filter blur-[120px] animate-[pulse_8s_ease-in-out_infinite]"></div>
+        <div class="absolute bottom-[-10%] right-[-10%] w-[50vw] h-[50vw] bg-cyan-600/20 rounded-full mix-blend-screen filter blur-[150px] animate-[pulse_10s_ease-in-out_infinite_reverse]"></div>
+        <div class="absolute top-[20%] right-[10%] w-[40vw] h-[40vw] bg-fuchsia-500/10 rounded-full mix-blend-screen filter blur-[100px] animate-[pulse_12s_ease-in-out_infinite]"></div>
+    </div>
+
+    <!-- Navbar -->
+    <div class="fixed top-0 w-full z-50 flex justify-center p-4 pointer-events-none">
+        <nav id="navbar" class="pointer-events-auto transition-all duration-500 rounded-3xl bg-transparent py-4 px-6 w-full max-w-7xl relative">
+            <div class="flex justify-between items-center w-full">
+                <!-- Logo -->
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-cyan-400 to-blue-600 flex items-center justify-center shadow-lg shadow-blue-500/30">
+                        <i data-lucide="award" class="text-white w-6 h-6"></i>
+                    </div>
+                    <span class="text-2xl font-bold text-white tracking-tight">CodeCert<span class="text-cyan-400">.</span></span>
+                </div>
+
+                <!-- Enlaces Desktop -->
+                <div class="hidden md:flex items-center gap-8 text-sm font-medium text-white/70">
+                    <a href="#inicio" class="hover:text-white transition-colors">Inicio</a>
+                    <a href="#plataformas" class="hover:text-white transition-colors">Plataformas</a>
+                    <a href="#tecnologias" class="hover:text-white transition-colors">Tecnologías</a>
+                    <a href="#certificados" class="hover:text-white transition-colors">Certificados</a>
+                </div>
+
+                <!-- Botones Desktop -->
+                <div class="hidden md:flex items-center gap-4">
+                    <button class="text-sm font-medium text-white/70 hover:text-white transition-colors">Login</button>
+                    <button class="px-6 py-2.5 text-sm font-semibold bg-white/10 hover:bg-white/20 text-white backdrop-blur-md border border-white/20 rounded-full transition-all shadow-lg hover:shadow-cyan-500/25">
+                        Empezar Gratis
+                    </button>
+                </div>
+
+                <!-- Botón Menú Móvil -->
+                <button id="menu-btn" class="md:hidden text-white flex items-center justify-center">
+                    <i data-lucide="menu" id="menu-icon"></i>
+                </button>
+            </div>
+
+            <!-- Menú Móvil (Oculto por defecto) -->
+            <div id="mobile-menu" class="hidden md:hidden mt-4 pt-4 border-t border-white/10 flex flex-col gap-4 pb-2">
+                <a href="#inicio" class="mobile-link text-white/70 hover:text-white text-lg font-medium px-2">Inicio</a>
+                <a href="#plataformas" class="mobile-link text-white/70 hover:text-white text-lg font-medium px-2">Plataformas</a>
+                <a href="#tecnologias" class="mobile-link text-white/70 hover:text-white text-lg font-medium px-2">Tecnologías</a>
+                <a href="#certificados" class="mobile-link text-white/70 hover:text-white text-lg font-medium px-2">Certificados</a>
+            </div>
+        </nav>
+    </div>
+
+    <!-- Hero Section -->
+    <section id="inicio" class="relative min-h-screen flex items-center justify-center pt-24 overflow-hidden z-10">
+        <div class="max-w-5xl mx-auto px-6 text-center z-10 flex flex-col items-center mt-10">
+            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 backdrop-blur-xl border border-white/20 text-sm text-cyan-300 mb-8 shadow-[0_0_20px_rgba(6,182,212,0.2)]">
+                <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
+                </svg>
+                <span class="font-medium">Certificaciones 100% Gratuitas Verificadas</span>
+            </div>
+
+            <h1 class="text-5xl md:text-7xl lg:text-8xl font-extrabold text-white tracking-tight leading-[1.05] mb-8 drop-shadow-lg">
+                Aprende a Programar <br class="hidden md:block" />
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 via-blue-400 to-indigo-400">
+                    Sin Pagar Nada
+                </span>
+            </h1>
+
+            <p class="text-lg md:text-xl text-white/70 max-w-2xl mx-auto mb-12 leading-relaxed font-light">
+                Descubre las mejores plataformas con cursos gratuitos de desarrollo web, IA y Python. Impulsa tu carrera con certificados oficiales.
+            </p>
+
+            <div class="flex flex-col sm:flex-row items-center gap-5 w-full sm:w-auto">
+                <button class="w-full sm:w-auto px-8 py-4 rounded-full bg-white text-black font-semibold text-lg hover:bg-gray-200 transition-all flex items-center justify-center gap-2 shadow-[0_0_40px_rgba(255,255,255,0.3)] hover:scale-105 duration-300">
+                    Explorar Cursos <i data-lucide="chevron-right" class="w-5 h-5"></i>
+                </button>
+                <button class="w-full sm:w-auto px-8 py-4 rounded-full bg-white/10 text-white font-semibold text-lg border border-white/20 backdrop-blur-xl hover:bg-white/20 transition-all flex items-center justify-center gap-2 hover:scale-105 duration-300 shadow-[0_8px_32px_rgba(0,0,0,0.2)]">
+                    Obtener Certificados <i data-lucide="award" class="w-5 h-5"></i>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Plataformas Section -->
+    <section id="plataformas" class="py-32 relative z-10">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-20">
+                <h2 class="text-4xl md:text-6xl font-bold text-white mb-6 tracking-tight drop-shadow-sm">Plataformas <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-300">Verificadas</span></h2>
+                <p class="text-white/60 text-lg max-w-2xl mx-auto font-light">Selección curada de la mejor educación tecnológica gratuita, con certificaciones oficiales de la industria.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                
+                <!-- freeCodeCamp -->
+                <div class="group relative bg-white/[0.05] backdrop-blur-2xl border border-white/10 rounded-[2rem] p-8 hover:bg-white/[0.08] hover:border-white/20 transition-all duration-500 shadow-[0_8px_32px_rgba(0,0,0,0.2)] hover:shadow-[0_16px_48px_rgba(0,0,0,0.4)] hover:-translate-y-2 overflow-hidden flex flex-col h-full">
+                    <div class="absolute -right-20 -top-20 w-64 h-64 bg-gradient-to-br from-blue-500 to-indigo-600 opacity-0 group-hover:opacity-20 blur-[80px] transition-opacity duration-700 rounded-full z-0"></div>
+                    <div class="flex items-start justify-between mb-8 relative z-10">
+                        <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center shadow-lg text-white ring-1 ring-white/20">
+                            <i data-lucide="code" class="w-6 h-6"></i>
+                        </div>
+                        <div class="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/10 text-white/90 text-xs font-semibold shadow-sm">
+                            <i data-lucide="check-circle" class="w-4 h-4 text-emerald-400"></i> Gratis
+                        </div>
+                    </div>
+                    <h3 class="text-2xl font-bold text-white mb-3 relative z-10">freeCodeCamp</h3>
+                    <p class="text-white/60 text-sm mb-8 leading-relaxed relative z-10 flex-grow">Aprende a programar con currículos estructurados y proyectos prácticos.</p>
+                    <div class="flex flex-wrap gap-2 mb-8 relative z-10">
+                        <span class="px-3 py-1.5 rounded-xl bg-white/5 border border-white/10 text-white/80 text-xs font-medium backdrop-blur-sm">HTML/CSS</span>
+                        <span class="px-3 py-1.5 rounded-xl bg-white/5 border border-white/10 text-white/80 text-xs font-medium backdrop-blur-sm">JavaScript</span>
+                        <span class="px-3 py-1.5 rounded-xl bg-white/5 border border-white/10 text-white/80 text-xs font-medium backdrop-blur-sm">React</span>
+                        <span class="px-3 py-1.5 rounded-xl bg-white/5 border border-white/10 text-white/80 text-xs font-medium backdrop-blur-sm">Python</span>
+                    </div>
+                    <a href="https://www.freecodecamp.org/" target="_blank" class="mt-auto inline-flex items-center justify-center gap-2 w-full px-5 py-3.5 rounded-xl bg-white/10 text-white text-sm font-semibold hover:bg-white/20 border border-white/10 backdrop-blur-md transition-all group/btn relative z-10 shadow-inner">
+                        Ir a la Plataforma <i data-lucide="external-link" class="w-4 h-4 group-hover/btn:translate-x-1 group-hover/btn:-translate-y-1 transition-transform"></i>
+                    </a>
+                </div>
+
+                <!-- CS50x Harvard -->
+                <div class="group relative bg-white/[0.05] backdrop-blur-2xl border border-white/10 rounded-[2rem] p-8 hover:bg-white/[0.08] hover:border-white/20 transition-all duration-500 shadow-[0_8px_32px_rgba(0,0,0,0.2)] hover:shadow-[0_16px_48px_rgba(0,0,0,0.4)] hover:-translate-y-2 overflow-hidden flex flex-col h-full">
+                    <div class="absolute -right-20 -top-20 w-64 h-64 bg-gradient-to-br from-red-500 to-rose-600 opacity-0 group-hover:opacity-20 blur-[80px] transition-opacity duration-700 rounded-full z-0"></div>
+                    <div class="flex items-start justify-between mb-8 relative z-10">
+                        <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-red-500 to-rose-600 flex items-center justify-center shadow-lg text-white ring-1 ring-white/20">
+                            <i data-lucide="terminal" class="w-6 h-6"></i>
+                        </div>
+                        <div class="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/10 text-white/90 text-xs font-semibold shadow-sm">
+                            <i data-lucide="check-circle" class="w-4 h-4 text-emerald-400"></i> Gratis
+                        </div>
+                    </div>
+                    <h3 class="text-2xl font-bold text-white mb-3 relative z-10">CS50x Harvard</h3>
+                    <p class="text-white/60 text-sm mb-8 leading-relaxed relative z-10 flex-grow">Introducción a las ciencias de la computación y el arte de la programación.</p>
+                    <div class="flex flex-wrap gap-2 mb-8 relative z-10">
+                        <span class="px-3 py-1.5 rounded-xl bg-white/5 border border-white/10 text-white/80 text-xs font-medium backdrop-blur-sm">C</span>
+                        <span class="px-3 py-1.5 rounded-xl bg-white/5 border border-white/10 text-white/80 text-xs font-medium backdrop-blur-sm">Python</span>
+                        <span class="px-3 py-1.5 rounded-xl bg-white/5 border border-white/10 text-white/80 text-xs font-medium backdrop-blur-sm">SQL</span>
+                        <span class="px-3 py-1.5 rounded-xl bg-white/5 border border-white/10 text-white/80 text-xs font-medium backdrop-blur-sm">Web</span>
+                    </div>
+                    <a href="https://cs50.harvard.edu/x/" target="_blank" class="mt-auto inline-flex items-center justify-center gap-2 w-full px-5 py-3.5 rounded-xl bg-white/10 text-white text-sm font-semibold hover:bg-white/20 border border-white/10 backdrop-blur-md transition-all group/btn relative z-10 shadow-inner">
+                        Ir a la Plataforma <i data-lucide="external-link" class="w-4 h-4 group-hover/btn:translate-x-1 group-hover/btn:-translate-y-1 transition-transform"></i>
+                    </a>
+                </div>
+
+                <!-- CS50P Harvard Python -->
+                <div class="group relative bg-white/[0.05] backdrop-blur-2xl border border-white/10 rounded-[2rem] p-8 hover:bg-white/[0.08] hover:border-white/20 transition-all duration-500 shadow-[0_8px_32px_rgba(0,0,0,0.2)] hover:shadow-[0_16px_48px_rgba(0,0,0,0.4)] hover:-translate-y-2 overflow-hidden flex flex-col h-full">
+                    <div class="absolute -right-20 -top-20 w-64 h-64 bg-gradient-to-br from-yellow-400 to-amber-600 opacity-0 group-hover:opacity-20 blur-[80px] transition-opacity duration-700 rounded-full z-0"></div>
+                    <div class="flex items-start justify-between mb-8 relative z-10">
+                        <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-yellow-400 to-amber-600 flex items-center justify-center shadow-lg text-white ring-1 ring-white/20">
+                            <i data-lucide="terminal" class="w-6 h-6"></i>
+                        </div>
+                        <div class="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/10 text-white/90 text-xs font-semibold shadow-sm">
+                            <i data-lucide="check-circle" class="w-4 h-4 text-emerald-400"></i> Gratis
+                        </div>
+                    </div>
+                    <h3 class="text-2xl font-bold text-white mb-3 relative z-10">CS50P Harvard Python</h3>
+                    <p class="text-white/60 text-sm mb-8 leading-relaxed relative z-10 flex-grow">Introducción a la programación en Python desde cero.</p>
+                    <div class="flex flex-wrap gap-2 mb-8 relative z-10">
+                        <span class="px-3 py-1.5 rounded-xl bg-white/5 border border-white/10 text-white/80 text-xs font-medium backdrop-blur-sm">Python</span>
+                    </div>
+                    <a href="https://cs50.harvard.edu/python/" target="_blank" class="mt-auto inline-flex items-center justify-center gap-2 w-full px-5 py-3.5 rounded-xl bg-white/10 text-white text-sm font-semibold hover:bg-white/20 border border-white/10 backdrop-blur-md transition-all group/btn relative z-10 shadow-inner">
+                        Ir a la Plataforma <i data-lucide="external-link" class="w-4 h-4 group-hover/btn:translate-x-1 group-hover/btn:-translate-y-1 transition-transform"></i>
+                    </a>
+                </div>
+
+                <!-- Full Stack Open -->
+                <div class="group relative bg-white/[0.05] backdrop-blur-2xl border border-white/10 rounded-[2rem] p-8 hover:bg-white/[0.08] hover:border-white/20 transition-all duration-500 shadow-[0_8px_32px_rgba(0,0,0,0.2)] hover:shadow-[0_16px_48px_rgba(0,0,0,0.4)] hover:-translate-y-2 overflow-hidden flex flex-col h-full">
+                    <div class="absolute -right-20 -top-20 w-64 h-64 bg-gradient-to-br from-cyan-400 to-blue-500 opacity-0 group-hover:opacity-20 blur-[80px] transition-opacity duration-700 rounded-full z-0"></div>
+                    <div class="flex items-start justify-between mb-8 relative z-10">
+                        <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-cyan-400 to-blue-500 flex items-center justify-center shadow-lg text-white ring-1 ring-white/20">
+                            <i data-lucide="layers" class="w-6 h-6"></i>
+                        </div>
+                        <div class="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/10 text-white/90 text-xs font-semibold shadow-sm">
+                            <i data-lucide="check-circle" class="w-4 h-4 text-emerald-400"></i> Gratis
+                        </div>
+                    </div>
+                    <h3 class="text-2xl font-bold text-white mb-3 relative z-10">Full Stack Open</h3>
+                    <p class="text-white/60 text-sm mb-8 leading-relaxed relative z-10 flex-grow">Desarrollo de aplicaciones web modernas por la Universidad de Helsinki.</p>
+                    <div class="flex flex-wrap gap-2 mb-8 relative z-10">
+                        <span class="px-3 py-1.5 rounded-xl bg-white/5 border border-white/10 text-white/80 text-xs font-medium backdrop-blur-sm">React</span>
+                        <span class="px-3 py-1.5 rounded-xl bg-white/5 border border-white/10 text-white/80 text-xs font-medium backdrop-blur-sm">Node.js</span>
+                        <span class="px-3 py-1.5 rounded-xl bg-white/5 border border-white/10 text-white/80 text-xs font-medium backdrop-blur-sm">MongoDB</span>
+                        <span class="px-3 py-1.5 rounded-xl bg-white/5 border border-white/10 text-white/80 text-xs font-medium backdrop-blur-sm">TypeScript</span>
+                    </div>
+                    <a href="https://fullstackopen.com/en/" target="_blank" class="mt-auto inline-flex items-center justify-center gap-2 w-full px-5 py-3.5 rounded-xl bg-white/10 text-white text-sm font-semibold hover:bg-white/20 border border-white/10 backdrop-blur-md transition-all group/btn relative z-10 shadow-inner">
+                        Ir a la Plataforma <i data-lucide="external-link" class="w-4 h-4 group-hover/btn:translate-x-1 group-hover/btn:-translate-y-1 transition-transform"></i>
+                    </a>
+                </div>
+
+                <!-- HackerRank Skills -->
+                <div class="group relative bg-white/[0.05] backdrop-blur-2xl border border-white/10 rounded-[2rem] p-8 hover:bg-white/[0.08] hover:border-white/20 transition-all duration-500 shadow-[0_8px_32px_rgba(0,0,0,0.2)] hover:shadow-[0_16px_48px_rgba(0,0,0,0.4)] hover:-translate-y-2 overflow-hidden flex flex-col h-full">
+                    <div class="absolute -right-20 -top-20 w-64 h-64 bg-gradient-to-br from-green-500 to-emerald-700 opacity-0 group-hover:opacity-20 blur-[80px] transition-opacity duration-700 rounded-full z-0"></div>
+                    <div class="flex items-start justify-between mb-8 relative z-10">
+                        <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-green-500 to-emerald-700 flex items-center justify-center shadow-lg text-white ring-1 ring-white/20">
+                            <i data-lucide="cpu" class="w-6 h-6"></i>
+                        </div>
+                        <div class="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/10 text-white/90 text-xs font-semibold shadow-sm">
+                            <i data-lucide="check-circle" class="w-4 h-4 text-emerald-400"></i> Gratis
+                        </div>
+                    </div>
+                    <h3 class="text-2xl font-bold text-white mb-3 relative z-10">HackerRank Skills</h3>
+                    <p class="text-white/60 text-sm mb-8 leading-relaxed relative z-10 flex-grow">Certifica tus habilidades resolviendo problemas de código reales.</p>
+                    <div class="flex flex-wrap gap-2 mb-8 relative z-10">
+                        <span class="px-3 py-1.5 rounded-xl bg-white/5 border border-white/10 text-white/80 text-xs font-medium backdrop-blur-sm">SQL</span>
+                        <span class="px-3 py-1.5 rounded-xl bg-white/5 border border-white/10 text-white/80 text-xs font-medium backdrop-blur-sm">JavaScript</span>
+                        <span class="px-3 py-1.5 rounded-xl bg-white/5 border border-white/10 text-white/80 text-xs font-medium backdrop-blur-sm">Python</span>
+                    </div>
+                    <a href="https://www.hackerrank.com/skills-directory" target="_blank" class="mt-auto inline-flex items-center justify-center gap-2 w-full px-5 py-3.5 rounded-xl bg-white/10 text-white text-sm font-semibold hover:bg-white/20 border border-white/10 backdrop-blur-md transition-all group/btn relative z-10 shadow-inner">
+                        Ir a la Plataforma <i data-lucide="external-link" class="w-4 h-4 group-hover/btn:translate-x-1 group-hover/btn:-translate-y-1 transition-transform"></i>
+                    </a>
+                </div>
+
+                <!-- Cisco Skills For All -->
+                <div class="group relative bg-white/[0.05] backdrop-blur-2xl border border-white/10 rounded-[2rem] p-8 hover:bg-white/[0.08] hover:border-white/20 transition-all duration-500 shadow-[0_8px_32px_rgba(0,0,0,0.2)] hover:shadow-[0_16px_48px_rgba(0,0,0,0.4)] hover:-translate-y-2 overflow-hidden flex flex-col h-full">
+                    <div class="absolute -right-20 -top-20 w-64 h-64 bg-gradient-to-br from-sky-400 to-blue-600 opacity-0 group-hover:opacity-20 blur-[80px] transition-opacity duration-700 rounded-full z-0"></div>
+                    <div class="flex items-start justify-between mb-8 relative z-10">
+                        <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-sky-400 to-blue-600 flex items-center justify-center shadow-lg text-white ring-1 ring-white/20">
+                            <i data-lucide="shield-check" class="w-6 h-6"></i>
+                        </div>
+                        <div class="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/10 text-white/90 text-xs font-semibold shadow-sm">
+                            <i data-lucide="check-circle" class="w-4 h-4 text-emerald-400"></i> Gratis
+                        </div>
+                    </div>
+                    <h3 class="text-2xl font-bold text-white mb-3 relative z-10">Cisco Skills For All</h3>
+                    <p class="text-white/60 text-sm mb-8 leading-relaxed relative z-10 flex-grow">Formación en ciberseguridad, redes y programación por Cisco.</p>
+                    <div class="flex flex-wrap gap-2 mb-8 relative z-10">
+                        <span class="px-3 py-1.5 rounded-xl bg-white/5 border border-white/10 text-white/80 text-xs font-medium backdrop-blur-sm">Python</span>
+                        <span class="px-3 py-1.5 rounded-xl bg-white/5 border border-white/10 text-white/80 text-xs font-medium backdrop-blur-sm">Linux</span>
+                        <span class="px-3 py-1.5 rounded-xl bg-white/5 border border-white/10 text-white/80 text-xs font-medium backdrop-blur-sm">Ciberseguridad</span>
+                    </div>
+                    <a href="https://skillsforall.com/" target="_blank" class="mt-auto inline-flex items-center justify-center gap-2 w-full px-5 py-3.5 rounded-xl bg-white/10 text-white text-sm font-semibold hover:bg-white/20 border border-white/10 backdrop-blur-md transition-all group/btn relative z-10 shadow-inner">
+                        Ir a la Plataforma <i data-lucide="external-link" class="w-4 h-4 group-hover/btn:translate-x-1 group-hover/btn:-translate-y-1 transition-transform"></i>
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Tecnologías Section -->
+    <section id="tecnologias" class="py-32 relative z-10">
+        <div class="max-w-5xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold text-white mb-6 drop-shadow-sm">Domina el <span class="text-transparent bg-clip-text bg-gradient-to-r from-fuchsia-400 to-purple-400">Stack Moderno</span></h2>
+                <p class="text-white/60 text-lg font-light">Encuentra cursos para las tecnologías más demandadas del mercado laboral.</p>
+            </div>
+
+            <div class="flex flex-wrap justify-center gap-4">
+                <!-- Se inyectan las tecnologías -->
+                <div class="px-6 py-4 rounded-full bg-white/5 backdrop-blur-xl border border-white/10 text-white/80 font-medium hover:bg-white/10 hover:text-white hover:border-white/30 hover:scale-105 transition-all cursor-default flex items-center gap-3 shadow-[0_4px_16px_rgba(0,0,0,0.1)] hover:shadow-[0_8px_32px_rgba(255,255,255,0.1)]">
+                    <div class="w-2 h-2 rounded-full bg-cyan-400 shadow-[0_0_8px_rgba(34,211,238,0.8)]"></div> HTML5
+                </div>
+                <div class="px-6 py-4 rounded-full bg-white/5 backdrop-blur-xl border border-white/10 text-white/80 font-medium hover:bg-white/10 hover:text-white hover:border-white/30 hover:scale-105 transition-all cursor-default flex items-center gap-3 shadow-[0_4px_16px_rgba(0,0,0,0.1)] hover:shadow-[0_8px_32px_rgba(255,255,255,0.1)]">
+                    <div class="w-2 h-2 rounded-full bg-cyan-400 shadow-[0_0_8px_rgba(34,211,238,0.8)]"></div> CSS3
+                </div>
+                <div class="px-6 py-4 rounded-full bg-white/5 backdrop-blur-xl border border-white/10 text-white/80 font-medium hover:bg-white/10 hover:text-white hover:border-white/30 hover:scale-105 transition-all cursor-default flex items-center gap-3 shadow-[0_4px_16px_rgba(0,0,0,0.1)] hover:shadow-[0_8px_32px_rgba(255,255,255,0.1)]">
+                    <div class="w-2 h-2 rounded-full bg-cyan-400 shadow-[0_0_8px_rgba(34,211,238,0.8)]"></div> JavaScript
+                </div>
+                <div class="px-6 py-4 rounded-full bg-white/5 backdrop-blur-xl border border-white/10 text-white/80 font-medium hover:bg-white/10 hover:text-white hover:border-white/30 hover:scale-105 transition-all cursor-default flex items-center gap-3 shadow-[0_4px_16px_rgba(0,0,0,0.1)] hover:shadow-[0_8px_32px_rgba(255,255,255,0.1)]">
+                    <div class="w-2 h-2 rounded-full bg-cyan-400 shadow-[0_0_8px_rgba(34,211,238,0.8)]"></div> React
+                </div>
+                <div class="px-6 py-4 rounded-full bg-white/5 backdrop-blur-xl border border-white/10 text-white/80 font-medium hover:bg-white/10 hover:text-white hover:border-white/30 hover:scale-105 transition-all cursor-default flex items-center gap-3 shadow-[0_4px_16px_rgba(0,0,0,0.1)] hover:shadow-[0_8px_32px_rgba(255,255,255,0.1)]">
+                    <div class="w-2 h-2 rounded-full bg-cyan-400 shadow-[0_0_8px_rgba(34,211,238,0.8)]"></div> Node.js
+                </div>
+                <div class="px-6 py-4 rounded-full bg-white/5 backdrop-blur-xl border border-white/10 text-white/80 font-medium hover:bg-white/10 hover:text-white hover:border-white/30 hover:scale-105 transition-all cursor-default flex items-center gap-3 shadow-[0_4px_16px_rgba(0,0,0,0.1)] hover:shadow-[0_8px_32px_rgba(255,255,255,0.1)]">
+                    <div class="w-2 h-2 rounded-full bg-cyan-400 shadow-[0_0_8px_rgba(34,211,238,0.8)]"></div> TypeScript
+                </div>
+                <div class="px-6 py-4 rounded-full bg-white/5 backdrop-blur-xl border border-white/10 text-white/80 font-medium hover:bg-white/10 hover:text-white hover:border-white/30 hover:scale-105 transition-all cursor-default flex items-center gap-3 shadow-[0_4px_16px_rgba(0,0,0,0.1)] hover:shadow-[0_8px_32px_rgba(255,255,255,0.1)]">
+                    <div class="w-2 h-2 rounded-full bg-cyan-400 shadow-[0_0_8px_rgba(34,211,238,0.8)]"></div> Python
+                </div>
+                <div class="px-6 py-4 rounded-full bg-white/5 backdrop-blur-xl border border-white/10 text-white/80 font-medium hover:bg-white/10 hover:text-white hover:border-white/30 hover:scale-105 transition-all cursor-default flex items-center gap-3 shadow-[0_4px_16px_rgba(0,0,0,0.1)] hover:shadow-[0_8px_32px_rgba(255,255,255,0.1)]">
+                    <div class="w-2 h-2 rounded-full bg-cyan-400 shadow-[0_0_8px_rgba(34,211,238,0.8)]"></div> MongoDB
+                </div>
+                <div class="px-6 py-4 rounded-full bg-white/5 backdrop-blur-xl border border-white/10 text-white/80 font-medium hover:bg-white/10 hover:text-white hover:border-white/30 hover:scale-105 transition-all cursor-default flex items-center gap-3 shadow-[0_4px_16px_rgba(0,0,0,0.1)] hover:shadow-[0_8px_32px_rgba(255,255,255,0.1)]">
+                    <div class="w-2 h-2 rounded-full bg-cyan-400 shadow-[0_0_8px_rgba(34,211,238,0.8)]"></div> SQL
+                </div>
+                <div class="px-6 py-4 rounded-full bg-white/5 backdrop-blur-xl border border-white/10 text-white/80 font-medium hover:bg-white/10 hover:text-white hover:border-white/30 hover:scale-105 transition-all cursor-default flex items-center gap-3 shadow-[0_4px_16px_rgba(0,0,0,0.1)] hover:shadow-[0_8px_32px_rgba(255,255,255,0.1)]">
+                    <div class="w-2 h-2 rounded-full bg-cyan-400 shadow-[0_0_8px_rgba(34,211,238,0.8)]"></div> Git
+                </div>
+                <div class="px-6 py-4 rounded-full bg-white/5 backdrop-blur-xl border border-white/10 text-white/80 font-medium hover:bg-white/10 hover:text-white hover:border-white/30 hover:scale-105 transition-all cursor-default flex items-center gap-3 shadow-[0_4px_16px_rgba(0,0,0,0.1)] hover:shadow-[0_8px_32px_rgba(255,255,255,0.1)]">
+                    <div class="w-2 h-2 rounded-full bg-cyan-400 shadow-[0_0_8px_rgba(34,211,238,0.8)]"></div> Inteligencia Artificial
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Dashboard Preview Section -->
+    <section class="py-32 relative z-10">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid lg:grid-cols-2 gap-20 items-center">
+                
+                <div>
+                    <h2 class="text-4xl md:text-6xl font-bold text-white mb-8 leading-tight tracking-tight drop-shadow-sm">
+                        Tu progreso,<br/> en un <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 to-blue-500">vistazo</span>
+                    </h2>
+                    <p class="text-white/60 text-lg mb-10 leading-relaxed font-light">
+                        CodeCert te proporciona un dashboard unificado. Sigue tus avances, visualiza certificados y mide tu nivel de aprendizaje en un entorno diseñado a la perfección.
+                    </p>
+                    <ul class="space-y-6">
+                        <li class="flex items-center gap-4 text-white/80 font-medium">
+                            <div class="w-8 h-8 rounded-full bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center text-cyan-400 shadow-[0_0_15px_rgba(34,211,238,0.2)]">
+                                <i data-lucide="check-circle" class="w-4 h-4"></i>
+                            </div> Sincronización global de plataformas
+                        </li>
+                        <li class="flex items-center gap-4 text-white/80 font-medium">
+                            <div class="w-8 h-8 rounded-full bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center text-cyan-400 shadow-[0_0_15px_rgba(34,211,238,0.2)]">
+                                <i data-lucide="check-circle" class="w-4 h-4"></i>
+                            </div> Métricas de aprendizaje avanzadas
+                        </li>
+                        <li class="flex items-center gap-4 text-white/80 font-medium">
+                            <div class="w-8 h-8 rounded-full bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center text-cyan-400 shadow-[0_0_15px_rgba(34,211,238,0.2)]">
+                                <i data-lucide="check-circle" class="w-4 h-4"></i>
+                            </div> Bóveda segura de certificados
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Ventana estilo macOS / iOS Glass -->
+                <div class="relative rounded-[2.5rem] bg-white/5 backdrop-blur-3xl border border-white/20 shadow-[0_20px_60px_-15px_rgba(0,0,0,0.5)] overflow-hidden ring-1 ring-white/10 p-2 transform rotate-1 hover:rotate-0 transition-transform duration-500">
+                    <div class="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent opacity-50"></div>
+                    
+                    <div class="relative bg-[#0f1117]/80 backdrop-blur-2xl rounded-[2rem] p-6 sm:p-8 border border-white/5 h-full shadow-inner">
+                        <!-- Botones de ventana macOS -->
+                        <div class="flex gap-2 mb-8">
+                            <div class="w-3.5 h-3.5 rounded-full bg-[#ff5f56] shadow-inner"></div>
+                            <div class="w-3.5 h-3.5 rounded-full bg-[#ffbd2e] shadow-inner"></div>
+                            <div class="w-3.5 h-3.5 rounded-full bg-[#27c93f] shadow-inner"></div>
+                        </div>
+
+                        <!-- Encabezado del Mockup -->
+                        <div class="flex items-center justify-between mb-8 pb-6 border-b border-white/10">
+                            <div class="flex items-center gap-4">
+                                <div class="w-12 h-12 rounded-full bg-gradient-to-br from-cyan-400 to-indigo-500 p-[2px] shadow-lg">
+                                    <div class="w-full h-full bg-[#0f1117] rounded-full border border-white/10"></div>
+                                </div>
+                                <div>
+                                    <div class="text-white font-semibold text-lg">Alex Developer</div>
+                                    <div class="text-white/50 text-sm">Nivel 12 • Full Stack</div>
+                                </div>
+                            </div>
+                            <div class="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center shadow-inner">
+                                <i data-lucide="zap" class="w-5 h-5 text-yellow-400"></i>
+                            </div>
+                        </div>
+
+                        <!-- Estadísticas -->
+                        <div class="grid grid-cols-2 gap-4 mb-8">
+                            <div class="bg-white/5 backdrop-blur-md rounded-2xl p-5 border border-white/10 shadow-inner hover:bg-white/10 transition-colors">
+                                <div class="text-white/50 text-sm mb-2 font-medium">Cursos Completados</div>
+                                <div class="text-3xl font-bold text-white">14</div>
+                            </div>
+                            <div class="bg-white/5 backdrop-blur-md rounded-2xl p-5 border border-white/10 shadow-inner hover:bg-white/10 transition-colors">
+                                <div class="text-white/50 text-sm mb-2 font-medium">Certificados</div>
+                                <div class="text-3xl font-bold text-cyan-400 drop-shadow-[0_0_10px_rgba(34,211,238,0.5)]">8</div>
+                            </div>
+                        </div>
+
+                        <!-- Progreso -->
+                        <div class="space-y-6">
+                            <div>
+                                <div class="flex justify-between text-sm mb-3 font-medium">
+                                    <span class="text-white/80">React Avanzado</span>
+                                    <span class="text-cyan-400">85%</span>
+                                </div>
+                                <div class="w-full h-3 bg-white/5 rounded-full overflow-hidden border border-white/5 shadow-inner">
+                                    <div class="w-[85%] h-full bg-gradient-to-r from-cyan-400 to-blue-500 rounded-full relative">
+                                        <div class="absolute top-0 right-0 w-6 h-full bg-white/40 blur-sm"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between text-sm mb-3 font-medium">
+                                    <span class="text-white/80">CS50 Python</span>
+                                    <span class="text-purple-400">40%</span>
+                                </div>
+                                <div class="w-full h-3 bg-white/5 rounded-full overflow-hidden border border-white/5 shadow-inner">
+                                    <div class="w-[40%] h-full bg-gradient-to-r from-purple-500 to-pink-500 rounded-full"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Certificados Section -->
+    <section id="certificados" class="py-32 relative z-10">
+        <div class="max-w-7xl mx-auto px-6 text-center">
+            <h2 class="text-4xl md:text-5xl font-bold text-white mb-6 drop-shadow-sm">Prestigio para tu <span class="text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 to-orange-400">Currículum</span></h2>
+            <p class="text-white/60 text-lg max-w-2xl mx-auto mb-16 font-light">Insignias y diplomas con valor real. Compártelos en LinkedIn y destaca ante los reclutadores en formato de cristal esmerilado.</p>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Certificado 1 -->
+                <div class="group aspect-[4/3] bg-white/5 backdrop-blur-2xl border border-white/10 rounded-2xl p-4 relative overflow-hidden shadow-[0_8px_32px_rgba(0,0,0,0.3)] hover:shadow-[0_16px_48px_rgba(255,255,255,0.1)] hover:-translate-y-2 transition-all duration-300">
+                    <div class="w-full h-full bg-white/5 rounded-xl border border-white/10 flex flex-col items-center justify-center relative p-4 text-center shadow-inner">
+                        <i data-lucide="award" class="w-10 h-10 text-cyan-400 mb-3 drop-shadow-[0_0_8px_rgba(34,211,238,0.5)]"></i>
+                        <div class="text-[9px] text-white/50 font-medium uppercase tracking-[0.2em] mb-2">Certificate of Completion</div>
+                        <div class="text-white font-bold text-base tracking-wide">freeCodeCamp</div>
+                        <div class="w-16 h-[1px] bg-gradient-to-r from-transparent via-white/30 to-transparent my-3"></div>
+                        <div class="text-[10px] text-white/40 font-light">Verified Achievement</div>
+                        <div class="absolute inset-0 bg-gradient-to-tr from-transparent via-white/10 to-transparent -translate-x-full group-hover:animate-[shimmer_2s_infinite]"></div>
+                    </div>
+                </div>
+
+                <!-- Certificado 2 -->
+                <div class="group aspect-[4/3] bg-white/5 backdrop-blur-2xl border border-white/10 rounded-2xl p-4 relative overflow-hidden shadow-[0_8px_32px_rgba(0,0,0,0.3)] hover:shadow-[0_16px_48px_rgba(255,255,255,0.1)] hover:-translate-y-2 transition-all duration-300">
+                    <div class="w-full h-full bg-white/5 rounded-xl border border-white/10 flex flex-col items-center justify-center relative p-4 text-center shadow-inner">
+                        <i data-lucide="award" class="w-10 h-10 text-cyan-400 mb-3 drop-shadow-[0_0_8px_rgba(34,211,238,0.5)]"></i>
+                        <div class="text-[9px] text-white/50 font-medium uppercase tracking-[0.2em] mb-2">Certificate of Completion</div>
+                        <div class="text-white font-bold text-base tracking-wide">Harvard University</div>
+                        <div class="w-16 h-[1px] bg-gradient-to-r from-transparent via-white/30 to-transparent my-3"></div>
+                        <div class="text-[10px] text-white/40 font-light">Verified Achievement</div>
+                        <div class="absolute inset-0 bg-gradient-to-tr from-transparent via-white/10 to-transparent -translate-x-full group-hover:animate-[shimmer_2s_infinite]"></div>
+                    </div>
+                </div>
+
+                <!-- Certificado 3 -->
+                <div class="group aspect-[4/3] bg-white/5 backdrop-blur-2xl border border-white/10 rounded-2xl p-4 relative overflow-hidden shadow-[0_8px_32px_rgba(0,0,0,0.3)] hover:shadow-[0_16px_48px_rgba(255,255,255,0.1)] hover:-translate-y-2 transition-all duration-300">
+                    <div class="w-full h-full bg-white/5 rounded-xl border border-white/10 flex flex-col items-center justify-center relative p-4 text-center shadow-inner">
+                        <i data-lucide="award" class="w-10 h-10 text-cyan-400 mb-3 drop-shadow-[0_0_8px_rgba(34,211,238,0.5)]"></i>
+                        <div class="text-[9px] text-white/50 font-medium uppercase tracking-[0.2em] mb-2">Certificate of Completion</div>
+                        <div class="text-white font-bold text-base tracking-wide">Cisco Academy</div>
+                        <div class="w-16 h-[1px] bg-gradient-to-r from-transparent via-white/30 to-transparent my-3"></div>
+                        <div class="text-[10px] text-white/40 font-light">Verified Achievement</div>
+                        <div class="absolute inset-0 bg-gradient-to-tr from-transparent via-white/10 to-transparent -translate-x-full group-hover:animate-[shimmer_2s_infinite]"></div>
+                    </div>
+                </div>
+
+                <!-- Certificado 4 -->
+                <div class="group aspect-[4/3] bg-white/5 backdrop-blur-2xl border border-white/10 rounded-2xl p-4 relative overflow-hidden shadow-[0_8px_32px_rgba(0,0,0,0.3)] hover:shadow-[0_16px_48px_rgba(255,255,255,0.1)] hover:-translate-y-2 transition-all duration-300">
+                    <div class="w-full h-full bg-white/5 rounded-xl border border-white/10 flex flex-col items-center justify-center relative p-4 text-center shadow-inner">
+                        <i data-lucide="award" class="w-10 h-10 text-cyan-400 mb-3 drop-shadow-[0_0_8px_rgba(34,211,238,0.5)]"></i>
+                        <div class="text-[9px] text-white/50 font-medium uppercase tracking-[0.2em] mb-2">Certificate of Completion</div>
+                        <div class="text-white font-bold text-base tracking-wide">HackerRank</div>
+                        <div class="w-16 h-[1px] bg-gradient-to-r from-transparent via-white/30 to-transparent my-3"></div>
+                        <div class="text-[10px] text-white/40 font-light">Verified Achievement</div>
+                        <div class="absolute inset-0 bg-gradient-to-tr from-transparent via-white/10 to-transparent -translate-x-full group-hover:animate-[shimmer_2s_infinite]"></div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="relative z-10 pt-16 pb-8 border-t border-white/10 bg-white/[0.02] backdrop-blur-3xl">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-8 mb-12">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-cyan-400 to-blue-600 flex items-center justify-center shadow-lg">
+                        <i data-lucide="award" class="text-white w-6 h-6"></i>
+                    </div>
+                    <span class="text-2xl font-bold text-white tracking-tight">CodeCert<span class="text-cyan-400">.</span></span>
+                </div>
+                
+                <div class="flex flex-wrap justify-center gap-8 text-sm font-medium text-white/60">
+                    <a href="#" class="hover:text-white hover:scale-105 transition-all">Sobre Nosotros</a>
+                    <a href="#" class="hover:text-white hover:scale-105 transition-all">Contacto</a>
+                    <a href="#" class="hover:text-white hover:scale-105 transition-all">Privacidad</a>
+                    <a href="#" class="hover:text-white hover:scale-105 transition-all">GitHub</a>
+                </div>
+            </div>
+            
+            <div class="text-center text-xs text-white/40 pt-8 border-t border-white/10 font-light">
+                <p>Todos los cursos y certificados pertenecen a sus respectivas plataformas oficiales.</p>
+                <p class="mt-2" id="year-text">© CodeCert™. Diseñado con estilo Glassmorphism.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts: Lógica y Renderizado de Iconos -->
+    <script>
+        // Inicializar iconos de Lucide
+        lucide.createIcons();
+
+        // Obtener el año actual para el footer
+        document.getElementById('year-text').innerHTML = `© ${new Date().getFullYear()} CodeCert™. Diseñado con estilo Glassmorphism.`;
+
+        // Efecto de scroll en la Navbar (estilo glassmorphism dinámico)
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 20) {
+                // Estado con scroll
+                navbar.classList.remove('bg-transparent', 'py-4', 'max-w-7xl');
+                navbar.classList.add('bg-white/10', 'backdrop-blur-2xl', 'border', 'border-white/20', 'shadow-[0_8px_32px_rgba(0,0,0,0.3)]', 'py-3', 'max-w-5xl');
+            } else {
+                // Estado arriba (sin scroll)
+                navbar.classList.add('bg-transparent', 'py-4', 'max-w-7xl');
+                navbar.classList.remove('bg-white/10', 'backdrop-blur-2xl', 'border', 'border-white/20', 'shadow-[0_8px_32px_rgba(0,0,0,0.3)]', 'py-3', 'max-w-5xl');
+            }
+        });
+
+        // Lógica del menú móvil
+        const menuBtn = document.getElementById('menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileLinks = document.querySelectorAll('.mobile-link');
+        let isOpen = false;
+
+        function toggleMenu() {
+            isOpen = !isOpen;
+            if (isOpen) {
+                mobileMenu.classList.remove('hidden');
+                menuBtn.innerHTML = '<i data-lucide="x"></i>';
+            } else {
+                mobileMenu.classList.add('hidden');
+                menuBtn.innerHTML = '<i data-lucide="menu"></i>';
+            }
+            // Re-renderizar iconos al cambiar el innerHTML
+            lucide.createIcons();
+        }
+
+        menuBtn.addEventListener('click', toggleMenu);
+
+        // Cerrar menú al hacer clic en un enlace móvil
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                if(isOpen) toggleMenu();
+            });
+        });
+    </script>
+</body>
+</html>
